@@ -13,4 +13,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   deleteProduct: (id) => ipcRenderer.invoke("delete-product", id),
   getProductById: (id) => ipcRenderer.invoke("get-product-by-id", id),
   addCategory: (name) => ipcRenderer.invoke("add-category", name),
+  getAllProducts: () => ipcRenderer.invoke("get-all-products"),
+  saveTransaction: (data) => ipcRenderer.invoke("save-transaction", data),
+  getUsernameById: (id) => ipcRenderer.invoke("get-username-by-id", id),
 });

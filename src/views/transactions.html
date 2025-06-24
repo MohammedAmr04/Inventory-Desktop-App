@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Management - Transactions</title>
+    <link rel="stylesheet" href="../../index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles/transactions.css" />
+    <script type="module">
+      import { loadHeader } from "../components/header.js";
+      loadHeader("transactions"); // or 'transactions', etc.
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>New Transaction</h2>
+      <div class="transaction-header">
+        <label>Customer Name: <input type="text" id="customerName" /></label>
+        <span class="total-label"
+          >Total: $<span id="transactionTotal">0.00</span></span
+        >
+        <button id="saveTransactionBtn">Save Transaction</button>
+      </div>
+      <div class="search-add-row">
+        <input
+          type="text"
+          id="productSearchInput"
+          placeholder="Search products..."
+          autocomplete="off"
+        />
+        <div id="productSearchResults" class="search-results"></div>
+        <button id="addItemBtn"><i class="fa fa-plus"></i> Add Item</button>
+      </div>
+      <table id="transactionItemsTable">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Add/Edit Item -->
+    <div class="modal-bg" id="itemModalBg">
+      <div class="modal">
+        <h3 id="itemModalTitle">Add Item</h3>
+        <form id="itemForm">
+          <div class="error" id="itemFormError"></div>
+          <label
+            >Product
+            <select id="itemProductSelect" required></select>
+          </label>
+          <label
+            >Quantity <input type="number" id="itemQuantity" min="1" required
+          /></label>
+          <label
+            >Price
+            <input type="number" id="itemPrice" min="0" step="0.01" required
+          /></label>
+          <div class="modal-actions">
+            <button type="button" class="cancel" id="cancelItemModalBtn">
+              Cancel
+            </button>
+            <button type="submit" class="submit" id="submitItemModalBtn">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../scripts/transaction.js"></script>
+  </body>
+</html>
