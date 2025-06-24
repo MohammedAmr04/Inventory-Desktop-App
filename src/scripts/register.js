@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("registerForm");
   const errorEl = document.getElementById("error");
-
+  document
+    .getElementById("backToLoginBtn")
+    .addEventListener("click", function () {
+      window.location.href = "../../index.html";
+    });
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     errorEl.textContent = "";

@@ -16,7 +16,8 @@ form.addEventListener("submit", async (e) => {
 
     if (response.success) {
       // Redirect to dashboard or main page
-      window.location.href = "../views/dashboard.html";
+      window.location.href = "src/views/products.html";
+      console.log("dashboard");
     } else {
       errorMsg.textContent = response.message;
     }

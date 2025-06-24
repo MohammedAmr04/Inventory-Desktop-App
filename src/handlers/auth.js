@@ -7,7 +7,7 @@ export function loginUser({ username, password }) {
     .get(username, password);
 
   if (user) {
-    console.log(`user is login`);
+    console.log(user);
     return { success: true, user };
   } else {
     console.log(`user is notlogin`);

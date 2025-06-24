@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Management - Products</title>
+    <link rel="stylesheet" href="../../index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles/products.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Products Inventory</h2>
+      <div class="actions">
+        <button id="addProductBtn">
+          <i class="fa fa-plus"></i> Add Product
+        </button>
+        <button id="addCategoryBtn" style="background: #28a745">
+          <i class="fa fa-folder-plus"></i> Add Category
+        </button>
+        <div class="pagination">
+          <button id="prevPageBtn">Previous</button>
+          <span id="pageInfo"></span>
+          <button id="nextPageBtn">Next</button>
+        </div>
+      </div>
+      <form id="filterForm" class="filter-bar">
+        <input type="text" id="searchInput" placeholder="Search by name..." />
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+        </select>
+        <input
+          type="number"
+          id="minPrice"
+          placeholder="Min Price"
+          min="0"
+          step="0.01"
+        />
+        <input
+          type="number"
+          id="maxPrice"
+          placeholder="Max Price"
+          min="0"
+          step="0.01"
+        />
+        <input type="number" id="minQty" placeholder="Min Qty" min="0" />
+        <input type="number" id="maxQty" placeholder="Max Qty" min="0" />
+        <button type="submit"><i class="fa fa-search"></i> Filter</button>
+        <button type="button" id="clearFiltersBtn">Clear</button>
+      </form>
+      <table id="productsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Cost Price</th>
+            <th>Wholesale Price</th>
+            <th>Retail Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Add/Edit Product -->
+    <div class="modal-bg" id="productModalBg">
+      <div class="modal">
+        <h3 id="modalTitle">Add Product</h3>
+        <form id="productForm">
+          <div class="error" id="formError"></div>
+          <label>Name <input type="text" id="productName" required /></label>
+          <label
+            >Category
+            <select id="productCategory" required></select>
+          </label>
+          <label
+            >Quantity
+            <input type="number" id="productQuantity" min="0" required
+          /></label>
+          <label
+            >Cost Price
+            <input type="number" id="productCost" min="0" step="0.01" required
+          /></label>
+          <label
+            >Wholesale Price
+            <input
+              type="number"
+              id="productWholesale"
+              min="0"
+              step="0.01"
+              required
+          /></label>
+          <label
+            >Retail Price
+            <input
+              type="number"
+              id="productRetail"
+              min="0"
+              step="0.01"
+              required
+          /></label>
+          <div class="modal-actions">
+            <button type="button" class="cancel" id="cancelModalBtn">
+              Cancel
+            </button>
+            <button type="submit" class="submit" id="submitModalBtn">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Modal for Add Category -->
+    <div class="modal-bg" id="categoryModalBg">
+      <div class="modal">
+        <h3>Add Category</h3>
+        <form id="categoryForm">
+          <div class="error" id="categoryFormError"></div>
+          <label
+            >Category Name <input type="text" id="categoryNameInput" required
+          /></label>
+          <div class="modal-actions">
+            <button type="button" class="cancel" id="cancelCategoryModalBtn">
+              Cancel
+            </button>
+            <button type="submit" class="submit" id="submitCategoryModalBtn">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../scripts/product.js"></script>
+  </body>
+</html>

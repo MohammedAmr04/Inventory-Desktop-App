@@ -3,12 +3,42 @@ import path from "node:path";
 import started from "electron-squirrel-startup";
 const { ipcMain } = require("electron");
 import { loginUser, registerUser } from "./handlers/auth.js";
+import {
+  getProducts,
+  getCategories,
+  addProduct,
+  editProduct,
+  deleteProduct,
+  getProductById,
+  addCategory,
+} from "./handlers/products.js";
 
 ipcMain.handle("login-user", (event, credentials) => {
   return loginUser(credentials);
 });
 ipcMain.handle("register-user", (event, credentials) => {
   return registerUser(credentials);
+});
+ipcMain.handle("get-products", (event, { page, pageSize, filters }) => {
+  return getProducts(page, pageSize, filters);
+});
+ipcMain.handle("get-categories", () => {
+  return getCategories();
+});
+ipcMain.handle("add-product", (event, product) => {
+  return addProduct(product);
+});
+ipcMain.handle("edit-product", (event, product) => {
+  return editProduct(product);
+});
+ipcMain.handle("delete-product", (event, id) => {
+  return deleteProduct(id);
+});
+ipcMain.handle("get-product-by-id", (event, id) => {
+  return getProductById(id);
+});
+ipcMain.handle("add-category", (event, name) => {
+  return addCategory(name);
 });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
