@@ -11,7 +11,10 @@ import {
   deleteProduct,
   getProductById,
   addCategory,
+  getAllProducts,
+  saveTransaction,
 } from "./handlers/products.js";
+import db from "./db/db.js";
 
 ipcMain.handle("login-user", (event, credentials) => {
   return loginUser(credentials);
@@ -39,6 +42,20 @@ ipcMain.handle("get-product-by-id", (event, id) => {
 });
 ipcMain.handle("add-category", (event, name) => {
   return addCategory(name);
+});
+ipcMain.handle("get-all-products", () => {
+  return getAllProducts();
+});
+ipcMain.handle("save-transaction", (event, data) => {
+  return saveTransaction(data);
+});
+ipcMain.handle("get-username-by-id", (event, id) => {
+  try {
+    const user = db.prepare("SELECT username FROM users WHERE id = ?").get(id);
+    return user ? user.username : "Guest";
+  } catch (err) {
+    return "Guest";
+  }
 });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.

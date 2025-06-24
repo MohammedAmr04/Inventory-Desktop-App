@@ -1,0 +1,88 @@
+/* Header Styles */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 56px;
+    background: #22304a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    box-shadow: 0 2px 8px #0002;
+    z-index: 100;
+}
+
+.header-left .app-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.08em;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    background: #2e4372;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#headerUserInfo {
+    font-size: 1.05em;
+}
+
+#headerLogoutBtn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.08em;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+#headerLogoutBtn:hover {
+    background: #2e4372;
+}
+
+@media (max-width: 700px) {
+    .app-header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 8px;
+    }
+
+    .header-nav {
+        gap: 10px;
+    }
+
+    .header-left,
+    .header-right {
+        margin-bottom: 6px;
+    }
+}
+
+body {
+    padding-top: 56px;
+}

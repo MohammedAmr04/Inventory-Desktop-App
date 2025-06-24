@@ -117,6 +117,42 @@ function addCategory(name) {
   return info.lastInsertRowid;
 }
 
+// Fetch all products (id, name, quantity, retail_price)
+function getAllProducts() {
+  return db
+    .prepare(
+      "SELECT id, name, quantity, retail_price FROM products ORDER BY name"
+    )
+    .all();
+}
+
+// Save a transaction and its items
+function saveTransaction({ customer_name, items, user_id = 1 }) {
+  if (!customer_name || !items || !items.length)
+    throw new Error("Invalid transaction data");
+  const total = items.reduce((sum, item) => sum + item.price, 0);
+  const tx = db.transaction(() => {
+    const info = db
+      .prepare(
+        `INSERT INTO transactions (customer_name, total, user_id) VALUES (?, ?, ?)`
+      )
+      .run(customer_name, total, user_id);
+    const transaction_id = info.lastInsertRowid;
+    const stmt = db.prepare(
+      `INSERT INTO transaction_items (transaction_id, product_id, quantity, price) VALUES (?, ?, ?, ?)`
+    );
+    for (const item of items) {
+      stmt.run(transaction_id, item.productId, item.quantity, item.price);
+      // Decrement product stock
+      db.prepare(
+        `UPDATE products SET quantity = quantity - ? WHERE id = ? AND quantity >= ?`
+      ).run(item.quantity, item.productId, item.quantity);
+    }
+    return transaction_id;
+  });
+  tx();
+}
+
 export {
   getProducts,
   getCategories,
@@ -125,6 +161,8 @@ export {
   deleteProduct,
   getProductById,
   addCategory,
+  getAllProducts,
+  saveTransaction,
 };
 
 export default {
@@ -135,4 +173,6 @@ export default {
   deleteProduct,
   getProductById,
   addCategory,
+  getAllProducts,
+  saveTransaction,
 };
